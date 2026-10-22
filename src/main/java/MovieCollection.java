@@ -7,8 +7,43 @@ public class MovieCollection {
         movies = new ArrayList<>();
     }
 
-    public void addMovie(String title, String director, int yearCreated, boolean inColor,
-                         int lengthInMinutes, String genre) {
-        movies.add(new Movie(title, director, yearCreated, inColor, lengthInMinutes, genre));
+    public void addMovie(String title, String director, int yearCreated,
+                         boolean inColor, int lengthInMinutes, String genre) {
+        movies.add(new Movie(title, director, yearCreated, inColor,
+                lengthInMinutes, genre));
+    }
+
+    public ArrayList<Movie> getMovies() {
+        return movies;
+    }
+
+    public ArrayList<Movie> searchMovies(String searchText) {
+        ArrayList<Movie> matches = new ArrayList<>();
+        String text = searchText.toLowerCase();
+
+        for (Movie movie : movies) {
+            if (movie.getTitle().toLowerCase().contains(text)) {
+                matches.add(movie);
+            }
+        }
+
+        return matches;
+    }
+
+    public boolean editMovie(Movie movie, String title, String director,
+                             int yearCreated, boolean inColor,
+                             int lengthInMinutes, String genre) {
+        if (!movies.contains(movie)) {
+            return false;
+        }
+
+        movie.setTitle(title);
+        movie.setDirector(director);
+        movie.setYearCreated(yearCreated);
+        movie.setInColor(inColor);
+        movie.setLengthInMinutes(lengthInMinutes);
+        movie.setGenre(genre);
+
+        return true;
     }
 }

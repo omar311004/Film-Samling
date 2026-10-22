@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -16,12 +17,16 @@ public class UserInterface {
         while (running) {
             System.out.println();
             System.out.println("1. Opret en film");
+            System.out.println("2. Vis alle film");
+            System.out.println("3. Søg efter film");
             System.out.println("0. Afslut");
             System.out.print("Vælg: ");
 
             String choice = scanner.nextLine().trim();
             switch (choice) {
                 case "1" -> createMovie();
+                case "2" -> showAllMovies();
+                case "3" -> searchMovies();
                 case "0" -> running = false;
                 default -> System.out.println("Ukendt valg: " + choice);
             }
@@ -29,7 +34,42 @@ public class UserInterface {
 
         System.out.println("Tak for nu – farvel!");
     }
+    private void searchMovies() {
+        String searchText = readText("Søg efter titel: ");
 
+        ArrayList<Movie> matches = controller.searchMovies(searchText);
+
+        if (matches.isEmpty()) {
+            System.out.println("Ingen film matcher din søgning.");
+        } else {
+            System.out.println(matches.size() + " film matcher \"" + searchText + "\":");
+
+            for (Movie movie : matches) {
+                System.out.println();
+                System.out.println(movie.getTitle() + " (" + movie.getYearCreated() + ")");
+                System.out.println("Instruktør: " + movie.getDirector());
+                System.out.println("Genre: " + movie.getGenre());
+                System.out.println("Længde: " + movie.getLengthInMinutes() + " minutter");
+                System.out.println(movie.isInColor() ? "Farver" : "Sort-hvid");
+            }
+        }
+    }
+    private void showAllMovies() {
+        ArrayList<Movie> movies = controller.getMovies();
+
+        if (movies.isEmpty()) {
+            System.out.println("Der er ingen film i samlingen.");
+        } else {
+            for (Movie movie : movies) {
+                System.out.println();
+                System.out.println(movie.getTitle() + " (" + movie.getYearCreated() + ")");
+                System.out.println("Instruktør: " + movie.getDirector());
+                System.out.println("Genre: " + movie.getGenre());
+                System.out.println("Længde: " + movie.getLengthInMinutes() + " minutter");
+                System.out.println("Farver: " + (movie.isInColor() ? "Farver" : "Sort-hvid"));
+            }
+        }
+    }
     private void createMovie() {
         String title = readText("Titel: ");
         String director = readText("Instruktør: ");
