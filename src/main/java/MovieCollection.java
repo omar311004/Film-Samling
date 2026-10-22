@@ -46,4 +46,7 @@ public class MovieCollection {
 
         return true;
     }
+    public boolean deleteMovie(Movie movie) {
+        return movies.remove(movie);
+    }
 }

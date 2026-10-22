@@ -16,4 +16,13 @@ public class Controller {
     public ArrayList<Movie> searchMovies(String searchText) {
         return movieCollection.searchMovies(searchText);
     }
+    public boolean editMovie(Movie movie, String title, String director,
+                             int yearCreated, boolean inColor,
+                             int lengthInMinutes, String genre) {
+        return movieCollection.editMovie(movie, title, director,
+                yearCreated, inColor, lengthInMinutes, genre);
+    }
+    public boolean deleteMovie(Movie movie) {
+        return movieCollection.deleteMovie(movie);
+    }
 }
