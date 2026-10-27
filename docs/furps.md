@@ -9,7 +9,7 @@ Brugeren skal kunne søge efter film ved hjælp af en del af titlen, uanset stor
 Ja – implementeret i koden
 MovieCollection.searchMovies()
 U – Usability
-Programmet skal vise en nummereret menu, og ugyldige menuvalg skal give en fejlbesked uden at afslutte programmet.
+Programmet skal vise en nummereret menu med valgmulighederne 0–7. Hvis brugeren indtaster et heltal uden for dette interval, skal programmet vise en fejlbesked og derefter vise menuen igen uden at afslutte programmet.
 Ja – implementeret i koden
 UserInterface.startProgram()
 R – Reliability
