@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
@@ -203,6 +205,31 @@ public class UserInterface {
         return scanner.nextLine().trim();
     }
 
+    private LocalDate readDate(String prompt) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        while (true) {
+            String input = readText(prompt);
+
+            if (input.isEmpty()) {
+                return LocalDate.now();
+            }
+
+            try {
+                LocalDate date = LocalDate.parse(input, formatter);
+
+                if (date.isAfter(LocalDate.now())) {
+                    System.out.println("Datoen må ikke ligge i fremtiden. Prøv igen.");
+                    continue;
+                }
+
+                return date;
+            } catch (DateTimeParseException e) {
+                System.out.println("Ugyldig dato. Brug formatet dd-MM-yyyy.");
+            }
+        }
+    }
+
     private int readInt(String prompt) {
         while (true) {
             System.out.print(prompt);
@@ -238,8 +265,14 @@ public class UserInterface {
         }
 
         Movie movie = matches.get(choice - 1);
-        controller.markMovieAsWatched(movie);
-        System.out.println(movie.getTitle() + " er markeret som set.");
+        LocalDate date = readDate("Hvornår så du filmen? (dd-MM-yyyy, Enter = i dag): ");
+
+        try {
+            controller.markMovieAsWatched(movie, date);
+            System.out.println(movie.getTitle() + " er markeret som set.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Fejl: " + e.getMessage());
+        }
     }
 
     private void showMoviesNotWatchedForDays() {
