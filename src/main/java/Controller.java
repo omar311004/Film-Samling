@@ -28,9 +28,10 @@ public class Controller {
         return movieCollection.deleteMovie(movie);
     }
 
-    public void markMovieAsWatched(Movie movie) {
-        movie.markAsWatched(LocalDate.now());
+    public void markMovieAsWatched(Movie movie, LocalDate date) {
+        movie.markAsWatched(date);
     }
+
     public ArrayList<Movie> getMoviesNotWatchedForDays(int days) {
         LocalDate date = LocalDate.now().minusDays(days);
         return movieCollection.getMoviesNotWatchedSince(date);
