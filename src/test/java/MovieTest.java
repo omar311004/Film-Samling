@@ -1,6 +1,7 @@
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import java.time.LocalDate;
 
 class MovieTest {
 
@@ -33,5 +34,43 @@ class MovieTest {
 
         assertEquals("Avatar", movie.getTitle());
     }
+    @Test
+    void testNewMovieHasNeverBeenWatched() {
+        Movie movie = new Movie(
+                "Titanic", "James Cameron", 1997,
+                true, 195, "Romance"
+        );
 
+        assertFalse(movie.hasBeenWatched());
+        assertNull(movie.getLastWatched());
+    }
+    @Test
+    void testMarkAsWatchedSavesDate() {
+        Movie movie = new Movie(
+                "Titanic", "James Cameron", 1997,
+                true, 195, "Romance"
+        );
+
+        LocalDate date = LocalDate.of(2026, 10, 26);
+
+        movie.markAsWatched(date);
+
+        assertTrue(movie.hasBeenWatched());
+        assertEquals(date, movie.getLastWatched());
+    }
+    @Test
+    void testDaysSinceWatchedAcrossMonths() {
+        Movie movie = new Movie(
+                "Titanic", "James Cameron", 1997,
+                true, 195, "Romance"
+        );
+
+        movie.markAsWatched(LocalDate.of(2025, 9, 30));
+
+        long days = movie.getDaysSinceWatched(
+                LocalDate.of(2025, 10, 26)
+        );
+
+        assertEquals(26, days);
+    }
 }

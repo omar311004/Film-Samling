@@ -204,8 +204,15 @@ public class UserInterface {
     }
 
     private int readInt(String prompt) {
-        System.out.print(prompt);
-        return Integer.parseInt(scanner.nextLine().trim());
+        while (true) {
+            System.out.print(prompt);
+
+            try {
+                return Integer.parseInt(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Ugyldigt tal. Prøv igen.");
+            }
+        }
     }
     private void markMovieAsWatched() {
         System.out.print("Søg efter filmens titel: ");
