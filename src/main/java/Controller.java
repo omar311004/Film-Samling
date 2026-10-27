@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.time.LocalDate;
+
 public class Controller {
     private MovieCollection movieCollection;
 
@@ -24,5 +26,13 @@ public class Controller {
     }
     public boolean deleteMovie(Movie movie) {
         return movieCollection.deleteMovie(movie);
+    }
+
+    public void markMovieAsWatched(Movie movie) {
+        movie.markAsWatched(LocalDate.now());
+    }
+    public ArrayList<Movie> getMoviesNotWatchedForDays(int days) {
+        LocalDate date = LocalDate.now().minusDays(days);
+        return movieCollection.getMoviesNotWatchedSince(date);
     }
 }
