@@ -17,6 +17,7 @@ Programmet må ikke gå ned, hvis brugeren indtaster bogstaver i stedet for et t
 Nej – mangler fejlhåndtering
 UserInterface.readInt()
 P – Performance
+US14: Programmet skal kunne indlæse og gemme filmsamlingen i en CSV-fil.
 Programmet skal kunne søge blandt 100 film på under 1 sekund.
 Ikke kontrolleret – kræver måling
 MovieCollection.searchMovies()
