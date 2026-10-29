@@ -63,4 +63,7 @@ public class MovieCollection {
 
         return result;
     }
+    public void addMovie(Movie movie) {
+        movies.add(movie);
+    }
 }
