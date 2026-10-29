@@ -26,7 +26,10 @@ public class FileHandlerTest {
     }
 
     @Test
-    void testLoadInvalidLine() throws Exception {
+    void testLoadInvalidLine() throws Exception { java.nio.file.Files.writeString(
+            java.nio.file.Path.of("test-invalid.csv"),
+            "title;director;yearCreated;inColor;lengthInMinutes;genre;lastWatched\nUGYLDIG LINJE\n"
+    );
         FileHandler fileHandler = new FileHandler("test-invalid.csv");
         ArrayList<Movie> loadedMovies = fileHandler.loadMovies();
         assertEquals(1, fileHandler.getSkippedLineCount());
