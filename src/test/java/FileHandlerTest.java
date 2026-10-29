@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class FileHandlerTest {
     @Test
-    void testSaveAndLoadMovies() {
+    void testSaveAndLoadMovies() throws Exception {
         ArrayList<Movie> movies = new ArrayList<>();
         movies.add(new Movie(
                 "Titanic",
@@ -16,7 +16,7 @@ public class FileHandlerTest {
                 195,
                 "Romance"
         ));
-        FileHandler fileHandler = new FileHandler();
+        FileHandler fileHandler = new FileHandler("test-movies.csv");
         fileHandler.saveMovies(movies);
 
         ArrayList<Movie> loadedMovies = fileHandler.loadMovies();
@@ -26,13 +26,13 @@ public class FileHandlerTest {
     }
 
     @Test
-    void testLoadInvalidLine() {
-        FileHandler fileHandler = new FileHandler();
+    void testLoadInvalidLine() throws Exception {
+        FileHandler fileHandler = new FileHandler("test-invalid.csv");
         ArrayList<Movie> loadedMovies = fileHandler.loadMovies();
         assertEquals(1, fileHandler.getSkippedLineCount());
     }
     @Test
-    void testDanishCharacters() {
+    void testDanishCharacters() throws Exception {
 
         ArrayList<Movie> movies = new ArrayList<>();
         movies.add(new Movie(
@@ -43,13 +43,13 @@ public class FileHandlerTest {
                 93,
                 "Drama"
         ));
-        FileHandler fileHandler = new FileHandler();
+        FileHandler fileHandler = new FileHandler("test-danish.csv");
         fileHandler.saveMovies(movies);
         ArrayList<Movie> loadedMovies = fileHandler.loadMovies();
         assertEquals("Bænken", loadedMovies.get(0).getTitle());
     }
     @Test
-    void testDateIsPreserved() {
+    void testDateIsPreserved() throws Exception {
         ArrayList<Movie> movies = new ArrayList<>();
         movies.add(new Movie(
                 "Titanic",
@@ -59,7 +59,7 @@ public class FileHandlerTest {
                 195,
                 "Romance"
         ));
-        FileHandler fileHandler = new FileHandler();
+        FileHandler fileHandler = new FileHandler("test-date.csv");
         fileHandler.saveMovies(movies);
         ArrayList<Movie> loadedMovies = fileHandler.loadMovies();
         assertEquals(1997, loadedMovies.get(0).getYearCreated());
