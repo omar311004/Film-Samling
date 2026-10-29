@@ -3,6 +3,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
+import java.io.FileNotFoundException;
 
 public class UserInterface {
     private Scanner scanner;
@@ -15,6 +16,9 @@ public class UserInterface {
 
     public void startProgram() {
         System.out.println("Velkommen til min filmsamling!");
+
+        loadMovies();
+
 
         boolean running = true;
         while (running) {
@@ -43,6 +47,7 @@ public class UserInterface {
             }
         }
 
+        saveMovies();
         System.out.println("Tak for nu – farvel!");
     }
     private void searchMovies() {
@@ -301,6 +306,33 @@ public class UserInterface {
             System.out.println("Sidst set: " + date + " (for " + days + " dage siden)");
         } else {
             System.out.println("Sidst set: aldrig");
+        }
+    }
+
+    private void loadMovies() {
+        try {
+            int count = controller.loadMovies();
+            System.out.println(count + " film er indlæst.");
+
+            int skipped = controller.getSkippedLineCount();
+            if (skipped > 0) {
+                System.out.println("Advarsel: " + skipped + " ugyldige linjer blev sprunget over.");
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Ingen gemt filmsamling fundet. Starter med en tom samling.");
+        }
+    }
+
+    private void saveMovies() {
+        try {
+            if (controller.saveMoviesIfChanged()) {
+                System.out.println("Filmsamlingen er gemt.");
+            } else {
+                System.out.println("Ingen ændringer – intet at gemme.");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Fejl: Filmsamlingen kunne ikke gemmes.");
         }
     }
 }
