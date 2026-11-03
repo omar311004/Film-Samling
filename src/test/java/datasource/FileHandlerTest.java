@@ -1,3 +1,5 @@
+import datasource.FileHandler;
+import domainmodel.Movie;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 
