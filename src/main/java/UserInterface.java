@@ -30,6 +30,7 @@ public class UserInterface {
             System.out.println("5. Slet en film");
             System.out.println("6. Marker en film som set");
             System.out.println("7. Vis film, der ikke er set længe");
+            System.out.println("8. Vis film sorteret efter ...");
             System.out.println("0. Afslut");
             System.out.print("Vælg: ");
 
@@ -42,6 +43,7 @@ public class UserInterface {
                 case "5" -> deleteMovie();
                 case "6" -> markMovieAsWatched();
                 case "7" -> showMoviesNotWatchedForDays();
+                case "8" -> showMoviesSorted();
                 case "0" -> running = false;
                 default -> System.out.println("Ukendt valg: " + choice);
             }
@@ -50,6 +52,7 @@ public class UserInterface {
         saveMovies();
         System.out.println("Tak for nu – farvel!");
     }
+
     private void searchMovies() {
         String searchText = readText("Søg efter titel: ");
 
@@ -70,6 +73,7 @@ public class UserInterface {
             }
         }
     }
+
     private void showAllMovies() {
         ArrayList<Movie> movies = controller.getMovies();
 
@@ -87,6 +91,7 @@ public class UserInterface {
             }
         }
     }
+
     private void createMovie() {
         String title = readText("Titel: ");
         String director = readText("Instruktør: ");
@@ -247,6 +252,7 @@ public class UserInterface {
             }
         }
     }
+
     private void markMovieAsWatched() {
         System.out.print("Søg efter filmens titel: ");
         String searchText = scanner.nextLine();
@@ -335,4 +341,35 @@ public class UserInterface {
             System.out.println("Fejl: Filmsamlingen kunne ikke gemmes.");
         }
     }
-}
+      private void showMoviesSorted () {
+               System.out.println("1. Titel");
+                System.out.println("2. Instruktør");
+                System.out.println("3. Årstal");
+                System.out.println("4. Længde");
+                System.out.println("5. Genre");
+
+                String choice = readText("Vælg sortering: ");
+
+                SortField field = switch (choice) {
+                    case "1" -> SortField.TITLE;
+                    case "2" -> SortField.DIRECTOR;
+                    case "3" -> SortField.YEAR;
+                    case "4" -> SortField.LENGTH;
+                    case "5" -> SortField.GENRE;
+                    default -> null;
+                };
+
+                if (field == null) {
+                    System.out.println("Ugyldigt valg.");
+                    return;
+                }
+
+                ArrayList<Movie> movies = controller.getMoviesSortedBy(field);
+
+                for (Movie movie : movies) {
+                    System.out.println(movie.getTitle() + " (" + movie.getYearCreated() + ")");
+
+                }
+
+            }
+        }    
