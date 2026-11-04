@@ -26,6 +26,9 @@ public class Controller {
     public ArrayList<Movie> getMovies() {
         return movieCollection.getMovies();
     }
+    public ArrayList<Movie> getMoviesSortedByTitle() {
+        return movieCollection.getMoviesSortedByTitle();
+    }
     public ArrayList<Movie> searchMovies(String searchText) {
         return movieCollection.searchMovies(searchText);
     }
