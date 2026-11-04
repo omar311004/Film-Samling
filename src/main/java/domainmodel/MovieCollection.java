@@ -2,6 +2,7 @@ package domainmodel;
 
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.Collections;
 
 public class MovieCollection {
     private ArrayList<Movie> movies;
@@ -67,5 +68,10 @@ public class MovieCollection {
     }
     public void addMovie(Movie movie) {
         movies.add(movie);
+    }
+    public ArrayList<Movie> getMoviesSortedByTitle() {
+        ArrayList<Movie> sortedMovies = new ArrayList<>(movies);
+        Collections.sort(sortedMovies);
+        return sortedMovies;
     }
 }
