@@ -29,7 +29,7 @@ Sorteringen udføres på en kopi af filmsamlingen, så den oprindelige rækkefø
 
 Projektet bruger JUnit 5 til automatiske tests af blandt andet film, filmsamling, filhåndtering og sortering.
 
-Alle 24 tests består.
+Alle 25 tests består.
 
 ## Projektstruktur
 
