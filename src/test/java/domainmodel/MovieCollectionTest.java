@@ -2,6 +2,7 @@ package domainmodel;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import java.time.Duration;
 import java.time.LocalDate;
 
 public class MovieCollectionTest {
@@ -59,5 +60,16 @@ public class MovieCollectionTest {
                 1,
                 collection.getMoviesNotWatchedSince(cutoff).size()
         );
+    }
+
+    // Performance-krav (FURPS): søgning blandt 100 film skal tage under 1 sekund
+    @Test
+    void searchAmong100MoviesIsFasterThanOneSecond() {
+        MovieCollection collection = new MovieCollection();
+        for (int i = 1; i <= 100; i++) {
+            collection.addMovie("Film " + i, "Instruktør " + i, 1950 + i % 70, true, 90, "Drama");
+        }
+
+        assertTimeout(Duration.ofSeconds(1), () -> collection.searchMovies("film 5"));
     }
 }
