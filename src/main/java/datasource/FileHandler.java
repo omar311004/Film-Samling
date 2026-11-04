@@ -9,20 +9,24 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
 public class FileHandler {
     private String fileName;
     private int skippedLineCount;
 
     private static final String HEADER =
             "title;director;yearCreated;inColor;lengthInMinutes;genre;lastWatched";
+
     public FileHandler(String fileName) {
         this.fileName = fileName;
         this.skippedLineCount = 0;
 
     }
+
     public int getSkippedLineCount() {
         return skippedLineCount;
     }
+
     public void saveMovies(ArrayList<Movie> movies) throws FileNotFoundException {
         PrintStream output = new PrintStream(new File(fileName));
 
@@ -34,6 +38,7 @@ public class FileHandler {
 
         output.close();
     }
+
     private String toCsvLine(Movie movie) {
         String lastWatched = "";
 
@@ -49,6 +54,7 @@ public class FileHandler {
                 + movie.getGenre() + ";"
                 + lastWatched;
     }
+
     public ArrayList<Movie> loadMovies() throws FileNotFoundException {
         ArrayList<Movie> movies = new ArrayList<>();
         skippedLineCount = 0;
@@ -73,6 +79,7 @@ public class FileHandler {
         fileScanner.close();
         return movies;
     }
+
     private Movie parseMovie(String line) {
         String[] fields = line.split(";", -1);
 
