@@ -372,10 +372,15 @@ public class UserInterface {
 
                 ArrayList<Movie> movies = controller.getMoviesSortedBy(field);
 
-                for (Movie movie : movies) {
-                    System.out.println(movie.getTitle() + " (" + movie.getYearCreated() + ")");
-
-                }
+          for (Movie movie : movies) {
+              System.out.println();
+              System.out.println(movie.getTitle() + " (" + movie.getYearCreated() + ")");
+              System.out.println("Instruktør: " + movie.getDirector());
+              System.out.println("Genre: " + movie.getGenre());
+              System.out.println("Længde: " + movie.getLengthInMinutes() + " minutter");
+              System.out.println(movie.isInColor() ? "Farver" : "Sort-hvid");
+              showLastWatched(movie);
+          }
 
             }
         }    
