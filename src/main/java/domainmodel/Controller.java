@@ -1,7 +1,11 @@
+package domainmodel;
+
+import datasource.FileHandler;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.io.FileNotFoundException;
 import java.util.Comparator;
+
 
 public class Controller {
     private MovieCollection movieCollection;

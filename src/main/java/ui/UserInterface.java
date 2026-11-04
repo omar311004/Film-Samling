@@ -1,3 +1,7 @@
+package ui;
+
+import domainmodel.Controller;
+import domainmodel.Movie;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
