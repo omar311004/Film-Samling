@@ -1,7 +1,9 @@
 package ui;
 
+
 import domainmodel.Controller;
 import domainmodel.Movie;
+import domainmodel.SortField;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;

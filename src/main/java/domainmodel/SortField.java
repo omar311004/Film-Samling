@@ -1,3 +1,5 @@
+package domainmodel;
+
 public enum SortField {
     TITLE,
     DIRECTOR,
