@@ -1,7 +1,9 @@
 package ui;
 
+
 import domainmodel.Controller;
 import domainmodel.Movie;
+import domainmodel.SortField;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -79,7 +81,7 @@ public class UserInterface {
     }
 
     private void showAllMovies() {
-        ArrayList<Movie> movies = controller.getMovies();
+        ArrayList<Movie> movies = controller.getMoviesSortedByTitle();
 
         if (movies.isEmpty()) {
             System.out.println("Der er ingen film i samlingen.");
