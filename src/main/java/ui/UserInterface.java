@@ -79,7 +79,7 @@ public class UserInterface {
     }
 
     private void showAllMovies() {
-        ArrayList<Movie> movies = controller.getMovies();
+        ArrayList<Movie> movies = controller.getMoviesSortedByTitle();
 
         if (movies.isEmpty()) {
             System.out.println("Der er ingen film i samlingen.");
